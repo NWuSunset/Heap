@@ -10,5 +10,6 @@ class Heap {
 
  private:
   int heap[100]; //heap represented as an array with 100 slots
+  int heapIndex = 1; //heap starts at index 1
 };
 #endif 
