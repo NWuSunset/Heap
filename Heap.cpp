@@ -7,33 +7,34 @@ Heap::Heap() = default;
 
 //intial position of heapSize
 void Heap::insertNode(int num, int pos) {
-  std::cout << pos << std::endl;
   //Add to first empty spot in heap then floor(index/2) and compare it to the parent
   if (heapSize == 1) {
     heap[heapSize] = num; //head of tree
     heapSize++; // the next index in the tree (end of tree)
     return; 
   }
+        
 
-   if (pos == 1) { //if we are at the top of the tree
-     std::cout << "Top Pos" << std::endl;
-     return;
-  }
-
-  int parent = floor((heapSize)/2); //since parent would be floor(index/2)
+  int parent = floor((pos)/2); //since parent would be floor(index/2)
   //Insert to end
   if (num > heap[parent]) {
+    int nextParent = floor((parent)/2);
+    
     //Switch their positions then recursively run back through the tree to the first parent
     int temp = heap[parent];//save parent
     heap[parent] = num; //number is now the parent
-    heap[heapSize++] = temp; //parent is now swapped to the original point (and increasing heap size)
-    //Recuse through previous nodes (basically checking if num is greater than the next parent and so on until the top of the tree
-    return insertNode(num, --pos);
+    heap[pos] = temp; //parent is now swapped to the original point (and increasing heap size)
+
+    if (num <= heap[nextParent] || parent == 1) { //If the parent is bigger or we are at the top of the tree
+      heapSize++; //once recursion is done increase the heapsize
+      return; 
+    }
+    //Recurse throut previous nodes (basically checking if num is greater than the next parent and so on until the top of the tree
+    insertNode(num, parent);
   } 
 
-  //std::cout << parent << "-->" << parent << std::endl;
   if (num <= heap[parent]) {
-  //Inserting a lower value node
+    //Inserting a lower value node
   heap[heapSize++] = num; //basically just add it to the end
   }
 }

@@ -16,8 +16,12 @@ int main() {
   heap->insertNode(30, heap->heapSize);
   heap->insertNode(40, heap->heapSize);
   heap->insertNode(50, heap->heapSize);
+  heap->insertNode(200, heap->heapSize);
+  heap->insertNode(10, heap->heapSize);
+  heap->insertNode(60, heap->heapSize);
   
   heap->printHeap(1,0,heap->heapSize);
+  heap->printArr();
   while (!userSelection(heap)) {
   }
 }
