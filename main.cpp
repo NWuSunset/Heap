@@ -10,7 +10,14 @@ void insert_nodes(int nums[100]);
 //Should be able to enter numbers, remove numbers, and display the tree visually
 int main() {
   Heap* heap = new Heap(); 
+  heap->printHeap(1,0,16);
+  heap->insertNode(100, heap->heapSize);
+  heap->insertNode(20, heap->heapSize);
+  heap->insertNode(30, heap->heapSize);
+  heap->insertNode(40, heap->heapSize);
+  heap->insertNode(50, heap->heapSize);
   
+  heap->printHeap(1,0,heap->heapSize);
   while (!userSelection(heap)) {
   }
 }
@@ -21,6 +28,13 @@ bool userSelection(Heap* heap) {
   int size;
   cout << "Type CONSOLE to enter a series of numbers in the console. Or type FILE to enter a file name" << endl;
     cin.getline(userInput, 9);
+
+ //in case more than 8 characters are entered (so it won't break the program)
+    if (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    }
+    
   if (strcasecmp(userInput, "FILE") == 0) {
     cout << "GO File" << endl;
   } else if (strcasecmp(userInput, "CONSOLE") == 0) {
@@ -32,11 +46,13 @@ bool userSelection(Heap* heap) {
     for (int i = 0; i < size; i++) {
       cout << "Enter number: " << endl;
       cin >> nums[i];
-      heap->insertNode(nums[i]); //add to heap
+      heap->insertNode(nums[i], heap->heapSize); //add to heap
     }
+  } else if (strcasecmp(userInput, "QUIT") == 0) {
+    return true;
   }
 
-  return true;
+  return false;
   
 }
 
