@@ -14,7 +14,7 @@ void fromConsole(Heap* heap);
 //Should be able to enter numbers, remove numbers, and display the tree visually
 int main() {
     Heap* heap = new Heap(); //use auto or no?
-    //heap->printHeap(1, 0, 16);
+    /* heap->printHeap(1, 0, 16);
     heap->insertNode(100, heap->heapSize);
     heap->insertNode(20, heap->heapSize);
     heap->insertNode(30, heap->heapSize);
@@ -25,7 +25,7 @@ int main() {
     heap->insertNode(60, heap->heapSize);
 
     heap->printHeap(1, 0, heap->heapSize);
-    heap->printArr();
+    heap->printArr(); */
 
     while (!userSelection(heap)) {}
 }
@@ -62,6 +62,7 @@ void fromFile(Heap* heap) {
 
     if (numFile.is_open()) {
         int num;
+        cout << "Inserting numbers into the heap..." << endl;
         while (numFile >> num) {
             heap->insertNode(num, heap->heapSize);
         }
@@ -81,6 +82,7 @@ void fromConsole(Heap* heap) {
     //object to stream the string into different variables (since we input ints separated by spaces)
     int num;
 
+    cout << "Inserting numbers into the heap..." << endl;
     //Stream a number till while space is encountered. Do this until end of string is hit
     while (iss >> num) {
         heap->insertNode(num, heap->heapSize); //add num to heap
