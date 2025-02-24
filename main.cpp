@@ -24,15 +24,15 @@ bool userSelection(Heap* heap) {
 
     //in case more than 8 characters are entered (so it won't break the program)
     if (cin.fail()) {
-        cin.clear();
+      cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
         cout << "Input Error. Input is too long" << endl;
     }
-
+    
     if (strcasecmp(userInput, "FILE") == 0) {
-        fromFile(heap);
+      fromFile(heap);
     } else if (strcasecmp(userInput, "CONSOLE") == 0) {
-        fromConsole(heap);
+      fromConsole(heap);
     } else if (strcasecmp(userInput, "PRINT") == 0) {
         heap->printHeap(1, 0, heap->heapSize);
     } else if (strcasecmp(userInput, "remove-root") == 0) {
@@ -41,6 +41,8 @@ bool userSelection(Heap* heap) {
         heap->deleteAll();
     } else if (strcasecmp(userInput, "QUIT") == 0) {
         return true;
+    } else if (strcasecmp(userInput, "arr") == 0) {
+      heap->printArr(); //for debug purposes
     } else {
         cout << "Invalid input." << endl;
     }
@@ -56,6 +58,7 @@ void fromFile(Heap* heap) {
 
     if (numFile.is_open()) {
         int num;
+        cout << "Inserting numbers into the heap..." << endl;
         cout << "Adding numbers from file" << endl;
         while (numFile >> num) {
             heap->insertNode(num, heap->heapSize);
@@ -75,6 +78,7 @@ void fromConsole(Heap* heap) {
     //object to stream the string into different variables (since we input ints separated by spaces)
     int num;
 
+    cout << "Inserting numbers into the heap..." << endl;
     //Stream a number till while space is encountered. Do this until end of string is hit
     while (iss >> num) {
         heap->insertNode(num, heap->heapSize); //add num to heap

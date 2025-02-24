@@ -54,14 +54,14 @@ void Heap::printHeap(const int pos, const int depth, const int size) {
     if (pos * 2 + 1 < size) {
         //check if right node exists
         printHeap(pos * 2 + 1, depth + 1, size); //recursion right of the tree
-    }
-    for (int i = 0; i < depth; i++) {
-        std::cout << '\t'; //add a tab for each depth
-    }
-    std::cout << heap[pos] << std::endl; //print out the node
-    if (pos * 2 < size) {
-        //Check if left exists
-        printHeap(pos * 2, depth + 1, size); //recurse through the left of the tree
+  }
+  for (int i = 0; i < depth; i++) {
+    std::cout << '\t'; //add a tab for each depth
+  }
+  std::cout << heap[pos] << std::endl; //print out the node
+  if (pos * 2 < size) {
+    //Check if left exists
+    printHeap(pos * 2, depth + 1, size); //recurse through the left of the tree
     }
 }
 
@@ -117,8 +117,12 @@ void Heap::deleteAll() {
 }
 
 void Heap::printArr() const {
-    //Debugging tool, prints the actual array
-    for (int i = 1; i < heapSize; i++) {
-        std::cout << heap[i] << std::endl;
-    }
+  if (heapSize == 1) {
+    std::cout << "No items in the heap" << std::endl;
+  }
+  
+  //Debugging tool, prints the actual array
+  for (int i = 1; i < heapSize; i++) {
+    std::cout << heap[i] << std::endl;
+  }
 }

@@ -3,7 +3,7 @@
 
 class Heap {
 public:
-    Heap();
+  Heap();
 
     void insertNode(int num, int pos); //inserts nodes from an existing number array (user input)
     void printHeap(int pos, int depth, int size); //prints out heap in tree formation for ease of viewing/debugging
