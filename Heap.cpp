@@ -46,6 +46,11 @@ void Heap::insertNode(const int num, const int pos) {
  * so it just continues through the function. So if the right tree was printed, it will then go print the top of the tree,
  * then the left of the tree (since that's the order the function is set up in). */
 void Heap::printHeap(const int pos, const int depth, const int size) {
+    if (heapSize == 1) {
+        std::cout << "No items in the heap" << std::endl;
+        return;
+    }
+    
     if (pos * 2 + 1 < size) {
         //check if right node exists
         printHeap(pos * 2 + 1, depth + 1, size); //recursion right of the tree
@@ -57,6 +62,57 @@ void Heap::printHeap(const int pos, const int depth, const int size) {
     if (pos * 2 < size) {
         //Check if left exists
         printHeap(pos * 2, depth + 1, size); //recurse through the left of the tree
+    }
+}
+
+void Heap::sortHeap(int index) {
+    int largest = index; 
+    int left = 2*index;
+    int right = 2*index + 1;
+
+    //if left is larger than root
+    if (left < heapSize && heap[left] > heap[largest]) {
+        largest = left;
+    }
+
+    if (right < heapSize && heap[right] > heap[largest]) {
+        largest = right;
+    }
+
+    if (largest != index) { //if largests is not the root
+        std::swap(heap[index], heap[largest]); //swap the root and the largest
+
+        //recursively keep swapping until the tree is correctly sorted
+        sortHeap(largest);
+    }
+
+    
+}
+
+void Heap::deleteRoot() {
+    if (heapSize == 1) {
+        std::cout << "No items in the heap" << std::endl;
+        return;
+    }
+    const int root = heap[1]; 
+    const int lastElement = heap[heapSize - 1];
+    heap[1] = lastElement; //replace root with last element of heap
+    heapSize = heapSize - 1; //reduce heap size
+
+    sortHeap(1); //sort heap starting at index 1 (root)
+
+    std::cout << "Removed: " << root << std::endl;
+}
+
+void Heap::deleteAll() {
+    if (heapSize == 1) {
+        std::cout << "No items in the heap" << std::endl;
+        return;
+    }
+
+    const int originalSize = heapSize;
+    while (heapSize > 1) { //go through all elements in the heap and delete them.
+        deleteRoot();
     }
 }
 
